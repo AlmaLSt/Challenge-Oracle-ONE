@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <title>Encriptador de texto</title>
+        <link rel= "stylesheet" href="style.css" />
+    </head>
+    <body>
+        <header>
+            <h1>Encriptador de texto</h1>
+        </header>
+            <br>
+            <br>    
+            <center>
+            <input type = "text" id = textoInicial placeholder="Solo letras minúsculas, sin acentos" 
+                onkeypress="return (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32)">
+                 <input type = "button" id = "btn-encriptar" onclick= "showEncriptar()" value = "Encriptar">
+                <input type = "button" id = "btn-desencriptar" onclick= "showDesencriptar()" value = "Desencriptar">
+                <br>
+            <br>
+            <br>
+        <h2>Tu mensaje </h2>
+            <br>
+                <input type = "text" id = "mensajeEncriptado" readonly = "readonly">
+                <input type = "button" id = "btn-copiar" value= "Copiar">
+            <br><br>
+             <br><br>
+            <footer>
+            <p>Desarrollado por: Almita</p>
+            <p>Enero 2022</p>
+        </footer>
+        </center>
+    </body>
+</html>
+
+<script>
+ 
+    var input = document.querySelector ("input"); 
+    input.focus();
+
+ //proceso de encriptación
+    function change (texto){
+
+        var textoCambiado = texto.replace(/e/g, 'enter').replace(/i/g, 'imes').replace(/a/g, 'ai') 
+        .replace(/o/g,'ober') .replace(/u/g, 'ufat')
+        return textoCambiado
+}
+
+//función del botón Encriptar
+    function showEncriptar (){
+
+        var texto = document.getElementById ("textoInicial").value;
+        var textoCambiado = change (texto);
+        document.getElementById("mensajeEncriptado").value = textoCambiado;  
+    
+        document.getElementById("textoInicial").value = '' //deja input en blanco después de ejecutar la función 
+}
+
+//proceso desencriptar
+    function convert (texto){
+
+        var textoConvert = texto.replace(/enter/g, 'e').replace(/imes/g, 'i').replace(/ai/g, 'a') 
+        .replace(/ober/g,'o') .replace(/ufat/g, 'u')
+        return textoConvert
+}
+
+//función del botón Desencriptar 
+    function showDesencriptar (){
+
+        var texto = document.getElementById ("textoInicial").value; 
+        var textoConvert = convert (texto);
+        document.getElementById("mensajeEncriptado").value = textoConvert; 
+
+        document.getElementById("textoInicial").value = ''
+}
+
+document.getElementById("btn-copiar").addEventListener('click', copiarTexto);
+
+function copiarTexto() {
+    document.querySelector("#mensajeEncriptado").select(); 
+    document.execCommand("copy");
+
+    document.getElementById("mensajeEncriptado").value = ''
+}
+
+
+    </script>
